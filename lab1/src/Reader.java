@@ -22,11 +22,11 @@ public class Reader {
                     return size;
                 }else{
                     System.out.println(Printer.getRedText("Error! Size of matrix has to be greater than 2 and less than 20"));
-                    System.out.println(Printer.getBlueText("Input size of matrix: "));
+                    System.out.println(Printer.getBlueText("Enter size of matrix: "));
                 }
             } catch (NumberFormatException e){
                 System.out.println(Printer.getRedText("Error! Size of matrix has to be an integer"));
-                System.out.println(Printer.getBlueText("Input size of matrix: "));
+                System.out.println(Printer.getBlueText("Enter size of matrix: "));
             }
         }
     }
@@ -74,7 +74,7 @@ public class Reader {
 
         while (!(typeOfInput.equals("keyboard") || typeOfInput.equals("k") || typeOfInput.equals("f") || typeOfInput.equals("file"))) {
             System.out.println(Printer.getRedText("Error!"));
-            System.out.println(Printer.getBlueText("Enter type of input: keyboard [k] or file [f]"));
+            System.out.println(Printer.getBlueText("Enter type of file1: keyboard [k] or file [f]"));
             typeOfInput = scanner.nextLine();
 
             isOver(typeOfInput);

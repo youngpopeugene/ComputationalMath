@@ -1,9 +1,9 @@
 public class Initialization {
     public static double[][] init(){
         System.out.println(Printer.getRedText("GAUSS METHOD with the choice of the main element by columns"));
-        System.out.println(Printer.getYellowText("If you want to stop program execution type \\exit in console"));
+        System.out.println(Printer.getYellowText("If you want to stop program execution type \\exit in console\n"));
         while(true) {
-            System.out.println(Printer.getBlueText("Enter type of input: keyboard [k] or file [f]"));
+            System.out.println(Printer.getBlueText("Enter type of file1: keyboard [k] or file [f]"));
             String typeOfInput = Reader.readTypeOfInput();
             switch (typeOfInput) {
                 case "k":
