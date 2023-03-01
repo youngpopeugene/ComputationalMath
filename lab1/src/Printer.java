@@ -47,7 +47,9 @@ public class Printer {
 
     public static void printSolutions(double[] solutions){
         System.out.println(Printer.getBlueText("Solutions for SLAE: "));
-        for (double v : solutions) System.out.printf(Printer.getGreenText("%8.2f\t"), v);
+        for (double v : solutions) {
+            System.out.println(Printer.getGreenText(formatterSolutions(v)));
+        }
         System.out.println("\n");
     }
 
@@ -55,5 +57,21 @@ public class Printer {
         System.out.println(Printer.getBlueText("Residual vector: "));
         for (double i : rv) System.out.printf(Printer.getGreenText("%8.2f\t"), i);
         System.out.println();
+    }
+
+    public static String formatterSolutions(double x){
+        String stringX = Format.NO_EXPONENT.fromDouble(x);
+        int count = 0;
+        int saveI = 0;
+        for (int i = 0; i < stringX.length(); i++) {
+            if (stringX.charAt(i) != '0' && stringX.charAt(i) != '.' && stringX.charAt(i) != '-'){
+                count++;
+            }
+            if (count == 2) {
+                saveI = i;
+                break;
+            }
+        }
+        return stringX.substring(0, saveI+2);
     }
 }

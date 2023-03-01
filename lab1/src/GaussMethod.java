@@ -73,7 +73,9 @@ public class GaussMethod {
             Printer.printMatrix(matrix);
 
             for (int k = n; k >= i; k--)
-                matrix[i][k] = matrix[i][k] / matrix[i][i];
+                matrix[i][k] /= matrix[i][i];
+
+            Printer.printMatrix(matrix);
 
             for (int k = i + 1; k < n; k++)
                 for (int j = n; j >= i; j--) {
