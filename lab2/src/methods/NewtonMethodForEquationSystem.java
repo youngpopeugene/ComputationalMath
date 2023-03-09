@@ -15,23 +15,30 @@ public class NewtonMethodForEquationSystem {
         double x_i = x_0;
         double y_i = y_0;
         int i = 0;
-
         EquationSystem equationSystem = EquationSystemStorage.getEquationSystem();
         double[][] matrix = new double[2][3];
 
         while(true){
             matrix[0][0] = equationSystem.getDerivativeXOfFirstEquation(x_i, y_i);
             matrix[0][1] = equationSystem.getDerivativeYOfFirstEquation(x_i, y_i);
-            matrix[0][2] = equationSystem.getFirstEquation(x_i, y_i);
+            matrix[0][2] = - equationSystem.getFirstEquation(x_i, y_i);
             matrix[1][0] = equationSystem.getDerivativeXOfSecondEquation(x_i, y_i);
             matrix[1][1] = equationSystem.getDerivativeYOfSecondEquation(x_i, y_i);
-            matrix[1][2] = equationSystem.getSecondEquation(x_i, y_i);
+            matrix[1][2] = - equationSystem.getSecondEquation(x_i, y_i);
+            for (int row = 0; row < matrix.length; row++) {
+                for (int col = 0; col < matrix[row].length; col++) {
+                    System.out.printf(Printer.getGreenText("%8.2f\t"), matrix[row][col]);
+                }
+                System.out.println();
+            }
+            System.out.println();
             double[] results = MatrixGaussMethod.calculateSolutions(matrix);
             x_i += results[0];
             y_i += results[1];
+            System.out.println(results[0] + " " + results[1]);
             i++;
-            if (i >= 10000) throw new TimeoutException();
-            if(Math.abs(results[0]) < accuracy && Math.abs(results[1]) < accuracy) break;
+            if (i >= 1000) throw new TimeoutException();
+            if(Math.abs(results[0]) < accuracy || Math.abs(results[1]) < accuracy) break;
         }
 
         Printer.printSystemResult(x_i, y_i, i);
@@ -68,10 +75,12 @@ public class NewtonMethodForEquationSystem {
                     matrix[i][k] /= matrix[i][i];
 
 
-                for (int k = i + 1; k < n; k++)
-                    for (int j = n; j >= i; j--) {
-                        matrix[k][j] -= matrix[k][i] * matrix[i][j];
+                for (int j = i + 1; j < n; j++){
+                    double k = matrix[i][i]/matrix[j][i];
+                    for (int l = i; l <= n; l++) {
+                        matrix[j][i] = matrix[j][l]*k - matrix[i][l];
                     }
+                }
 
             }
             return matrix;

@@ -8,6 +8,7 @@ import util.Reader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeoutException;
 
 public class Main {
@@ -42,7 +43,7 @@ public class Main {
                 double[] values = Reader.readInitialApproximation();
                 try {
                     NewtonMethodForEquationSystem.execute(values[0], values[1], accuracy);
-                } catch (NullPointerException | TimeoutException e) {
+                } catch (NullPointerException | NoSuchElementException | TimeoutException e ) {
                     System.out.println(Printer.getRedText("Error!"));
                     System.out.println(Printer.getRedText("Roots not found"));
                 }
